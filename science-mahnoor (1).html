@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science with Miss Mahnoor</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --purple:#7B2FBE;--green:#2ECC71;--yellow:#F1C40F;--orange:#FF6B35;
+  --pink:#FF6B9D;--blue:#3498DB;--teal:#1ABC9C;--red:#E74C3C;
+}
+body{font-family:'Nunito',sans-serif;background:#FFF9F0;overflow-x:hidden;}
+
+/* ===== HERO HEADER ===== */
+header{position:relative;overflow:hidden;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px 60px;}
+.header-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);z-index:0;}
+.stars-layer{position:absolute;inset:0;z-index:1;overflow:hidden;}
+.star-dot{position:absolute;border-radius:50%;background:#fff;animation:twinkle 3s infinite;}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+.planet1{position:absolute;width:80px;height:80px;background:radial-gradient(circle at 35% 35%,#a855f7,#6d28d9);border-radius:50%;top:15%;left:8%;box-shadow:0 0 30px #a855f755;animation:float 6s ease-in-out infinite;}
+.planet2{position:absolute;width:50px;height:50px;background:radial-gradient(circle at 35% 35%,#f97316,#dc2626);border-radius:50%;top:20%;right:12%;box-shadow:0 0 20px #f9731655;animation:float 8s ease-in-out infinite reverse;}
+.planet3{position:absolute;width:35px;height:35px;background:radial-gradient(circle at 35% 35%,#38bdf8,#0284c7);border-radius:50%;bottom:30%;left:20%;box-shadow:0 0 15px #38bdf855;animation:float 5s ease-in-out infinite;}
+.comet{position:absolute;top:10%;left:-100px;width:150px;height:3px;background:linear-gradient(90deg,transparent,#fff,#fff);border-radius:2px;animation:comet 8s linear infinite;transform:rotate(-15deg);}
+.comet::after{content:'';position:absolute;right:0;top:-4px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;}
+@keyframes comet{0%{left:-200px;opacity:0}20%{opacity:1}80%{opacity:1}100%{left:110%;opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.header-content{position:relative;z-index:5;text-align:center;}
+.title-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:6px 18px;color:#F1C40F;font-weight:800;font-size:.9rem;margin-bottom:15px;letter-spacing:1px;}
+.main-title{font-family:'Fredoka One',cursive;font-size:clamp(2.2rem,6vw,4.5rem);line-height:1.1;margin-bottom:10px;background:linear-gradient(135deg,#fff 0%,#F1C40F 30%,#FF6B9D 60%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(168,85,247,.5));}
+.subtitle{color:rgba(255,255,255,.85);font-size:1.1rem;font-weight:700;margin-bottom:15px;letter-spacing:.5px;}
+.header-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px;}
+.h-pill{background:rgba(255,255,255,.15);backdrop-filter:blur(5px);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:20px;padding:5px 14px;font-size:.85rem;font-weight:700;}
+.rocket-float{font-size:3rem;display:inline-block;animation:rocketfly 3s ease-in-out infinite;}
+@keyframes rocketfly{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-20px) rotate(5deg)}}
+.wave{position:absolute;bottom:0;left:0;width:100%;z-index:4;}
+
+/* ===== NAV ===== */
+nav{background:#1a0533;padding:10px 15px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+nav button{font-family:'Fredoka One',cursive;font-size:.95rem;border:none;border-radius:20px;padding:8px 16px;cursor:pointer;transition:all .3s;font-weight:700;box-shadow:0 3px 8px rgba(0,0,0,.2);}
+nav button:hover{transform:scale(1.1) rotate(-2deg);}
+.nav-home{background:linear-gradient(135deg,#F1C40F,#FF6B35);color:#fff;}
+.nav-g1{background:linear-gradient(135deg,#FF6B35,#FF6B9D);color:#fff;}
+.nav-g2{background:linear-gradient(135deg,#2ECC71,#1ABC9C);color:#fff;}
+.nav-vocab{background:linear-gradient(135deg,#FF6B9D,#a855f7);color:#fff;}
+.nav-games{background:linear-gradient(135deg,#3498DB,#7B2FBE);color:#fff;}
+.nav-exp{background:linear-gradient(135deg,#E74C3C,#FF6B35);color:#fff;}
+.nav-star{background:linear-gradient(135deg,#F1C40F,#2ECC71);color:#1a0533;}
+
+/* ===== SECTIONS ===== */
+section{display:none;padding:30px 20px;min-height:80vh;position:relative;z-index:1;}
+section.active{display:block;}
+
+/* ===== HOME ===== */
+.hero-cards{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:25px;}
+.hero-card{background:#fff;border-radius:22px;padding:22px 18px;width:190px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,.1);transition:transform .3s;cursor:pointer;border:3px solid transparent;position:relative;overflow:hidden;}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;}
+.hero-card:hover{transform:translateY(-10px) rotate(1deg);}
+.hero-card .hc-icon{font-size:3.5rem;margin-bottom:10px;display:block;}
+.hero-card h3{font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:6px;}
+.hero-card p{font-size:.82rem;color:#888;}
+.hc1::before{background:linear-gradient(90deg,#F1C40F,#FF6B35);}
+.hc1{border-color:#FF6B35;} .hc1 h3{color:#FF6B35;}
+.hc2::before{background:linear-gradient(90deg,#2ECC71,#1ABC9C);}
+.hc2{border-color:#2ECC71;} .hc2 h3{color:#2ECC71;}
+.hc3::before{background:linear-gradient(90deg,#FF6B9D,#a855f7);}
+.hc3{border-color:#FF6B9D;} .hc3 h3{color:#FF6B9D;}
+.hc4::before{background:linear-gradient(90deg,#3498DB,#7B2FBE);}
+.hc4{border-color:#3498DB;} .hc4 h3{color:#3498DB;}
+.hc5::before{background:linear-gradient(90deg,#E74C3C,#FF6B35);}
+.hc5{border-color:#E74C3C;} .hc5 h3{color:#E74C3C;}
+.hc6::before{background:linear-gradient(90deg,#F1C40F,#2ECC71);}
+.hc6{border-color:#F1C40F;} .hc6 h3{color:#7B2FBE;}
+
+/* ===== TOPIC CARDS ===== */
+.section-title{font-family:'Fredoka One',cursive;font-size:2.4rem;text-align:center;margin-bottom:8px;}
+.section-sub{text-align:center;color:#888;font-size:1rem;margin-bottom:25px;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+.topic-card{border-radius:20px;padding:22px;color:#fff;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(0,0,0,.15);}
+.topic-card:hover{transform:scale(1.04) rotate(-1deg);box-shadow:0 12px 30px rgba(0,0,0,.25);}
+.topic-card .t-icon{font-size:3rem;margin-bottom:10px;}
+.topic-card h3{font-family:'Fredoka One',cursive;font-size:1.4rem;margin-bottom:8px;}
+.topic-card p{font-size:.88rem;opacity:.9;}
+.tc-ice{background:linear-gradient(135deg,#3498DB,#1ABC9C);}
+.tc-plant{background:linear-gradient(135deg,#2ECC71,#27AE60);}
+.tc-magnet{background:linear-gradient(135deg,#E74C3C,#C0392B);}
+.tc-light{background:linear-gradient(135deg,#F1C40F,#E67E22);}
+.tc-elec{background:linear-gradient(135deg,#9B59B6,#6C3483);}
+.tc-circuit{background:linear-gradient(135deg,#FF6B35,#E74C3C);}
+.tc-lamp{background:linear-gradient(135deg,#FF6B9D,#C0392B);}
+.tc-city{background:linear-gradient(135deg,#1ABC9C,#3498DB);}
+
+/* ===== PBL ===== */
+.pbl-section{margin-top:25px;}
+.pbl-section h3{font-family:'Fredoka One',cursive;font-size:1.7rem;color:var(--purple);margin-bottom:15px;padding-left:12px;border-left:6px solid var(--purple);}
+.pbl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-bottom:28px;}
+.pbl-card{background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.1);border-left:5px solid var(--green);transition:transform .3s;}
+.pbl-card:hover{transform:translateY(-5px);}
+.pbl-card .p-icon{font-size:2.5rem;margin-bottom:8px;}
+.pbl-card h4{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--purple);margin-bottom:6px;}
+.pbl-card p{font-size:.88rem;color:#666;line-height:1.5;}
+.week-badge{display:inline-block;color:#fff;border-radius:10px;padding:3px 10px;font-size:.8rem;font-weight:700;margin-bottom:8px;}
+
+/* ===== VOCABULARY ===== */
+.vocab-filter{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:25px;}
+.vf-btn{border:none;border-radius:20px;padding:8px 18px;font-family:'Fredoka One',cursive;font-size:.95rem;cursor:pointer;transition:all .3s;box-shadow:0 3px 10px rgba(0,0,0,.1);}
+.vf-btn:hover,.vf-btn.active{transform:scale(1.08);}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px;}
+.vocab-card{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,.1);cursor:pointer;transition:all .3s;border:3px solid transparent;}
+.vocab-card:hover{transform:scale(1.07);}
+.vocab-card .v-icon{font-size:2.8rem;margin-bottom:7px;transition:transform .3s;}
+.vocab-card h4{font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:4px;}
+.vocab-card p{font-size:.78rem;color:#666;display:none;line-height:1.4;}
+.vocab-card.flipped p{display:block;}
+.vocab-card.flipped .v-icon{transform:scale(1.2);}
+
+/* ===== EXPERIMENTS ===== */
+.exp-header{text-align:center;margin-bottom:25px;}
+.exp-header h2{font-family:'Fredoka One',cursive;font-size:2.5rem;color:var(--red);}
+.exp-cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px;}
+.ec-btn{border:none;border-radius:20px;padding:8px 16px;font-family:'Fredoka One',cursive;font-size:.9rem;cursor:pointer;transition:all .3s;box-shadow:0 3px 8px rgba(0,0,0,.1);}
+.ec-btn:hover,.ec-btn.active{transform:scale(1.08);box-shadow:0 5px 15px rgba(0,0,0,.2);}
+.exp-search{width:100%;max-width:450px;display:block;margin:0 auto 25px;border:3px solid var(--orange);border-radius:25px;padding:12px 20px;font-size:1rem;font-family:'Nunito',sans-serif;outline:none;transition:all .3s;}
+.exp-search:focus{border-color:var(--purple);box-shadow:0 0 15px rgba(123,47,190,.3);}
+.exp-count{text-align:center;color:#888;font-weight:700;margin-bottom:20px;font-size:.95rem;}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.exp-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.1);transition:transform .3s;cursor:pointer;}
+.exp-card:hover{transform:translateY(-6px);}
+.exp-top{padding:18px 18px 12px;display:flex;align-items:center;gap:14px;}
+.exp-emoji{font-size:2.8rem;flex-shrink:0;}
+.exp-meta h4{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--purple);}
+.exp-meta .exp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px;}
+.exp-tag{font-size:.72rem;font-weight:700;border-radius:10px;padding:2px 8px;color:#fff;}
+.exp-body{padding:0 18px 18px;display:none;}
+.exp-card.open .exp-body{display:block;}
+.exp-body h5{font-weight:800;color:var(--orange);margin:8px 0 5px;font-size:.9rem;}
+.exp-body ul{padding-left:18px;}
+.exp-body ul li{font-size:.88rem;color:#555;margin-bottom:4px;line-height:1.4;}
+.exp-body .exp-steps{counter-reset:step;}
+.exp-body .exp-steps li{list-style:none;counter-increment:step;padding-left:30px;position:relative;font-size:.88rem;color:#555;margin-bottom:6px;}
+.exp-body .exp-steps li::before{content:counter(step);position:absolute;left:0;top:0;background:var(--purple);color:#fff;border-radius:50%;width:20px;height:20px;font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.exp-body .wow-box{background:linear-gradient(135deg,#F1C40F22,#FF6B3522);border-radius:12px;padding:10px 14px;margin-top:10px;font-size:.85rem;font-weight:700;color:var(--orange);border-left:4px solid var(--yellow);}
+.difficulty{font-size:.75rem;font-weight:800;padding:3px 10px;border-radius:10px;}
+.d-easy{background:#d4edda;color:#155724;}
+.d-medium{background:#fff3cd;color:#856404;}
+.exp-card .exp-top .exp-arrow{margin-left:auto;font-size:1.3rem;transition:transform .3s;color:#ccc;}
+.exp-card.open .exp-arrow{transform:rotate(180deg);color:var(--purple);}
+
+/* ===== GAMES ===== */
+.game-tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:25px;}
+.gt-btn{border:none;border-radius:20px;padding:10px 22px;font-family:'Fredoka One',cursive;font-size:1.05rem;cursor:pointer;background:#eee;color:#555;transition:all .3s;}
+.gt-btn.active,.gt-btn:hover{background:var(--blue);color:#fff;transform:scale(1.05);}
+.game-area{display:none;} .game-area.active{display:block;}
+.quiz-container{max-width:580px;margin:0 auto;background:#fff;border-radius:25px;padding:28px;box-shadow:0 8px 30px rgba(0,0,0,.15);}
+.quiz-progress{background:#eee;border-radius:10px;height:12px;margin-bottom:20px;}
+.quiz-bar{background:linear-gradient(90deg,var(--purple),var(--pink));height:100%;border-radius:10px;transition:width .5s;}
+.quiz-q{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--purple);text-align:center;margin-bottom:22px;}
+.quiz-icon{font-size:4rem;text-align:center;margin-bottom:12px;}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.q-opt{border:3px solid #ddd;background:#f9f9f9;border-radius:14px;padding:13px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .3s;font-family:'Nunito',sans-serif;}
+.q-opt:hover{border-color:var(--purple);background:#f0e8ff;}
+.q-opt.correct{background:#d4edda;border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:#f8d7da;border-color:var(--red);color:var(--red);}
+.quiz-score{text-align:center;margin-top:13px;font-size:1rem;font-weight:700;color:#888;}
+.quiz-result{text-align:center;padding:25px;}
+.quiz-result h3{font-family:'Fredoka One',cursive;font-size:2.3rem;color:var(--purple);margin-bottom:12px;}
+.restart-btn{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border:none;border-radius:25px;padding:14px 32px;font-family:'Fredoka One',cursive;font-size:1.2rem;cursor:pointer;margin-top:18px;transition:all .3s;}
+.restart-btn:hover{transform:scale(1.08);}
+.match-container{max-width:680px;margin:0 auto;}
+.match-score-bar{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:15px;padding:12px 20px;box-shadow:0 3px 15px rgba(0,0,0,.1);margin-bottom:14px;}
+.match-score-bar span{font-weight:800;font-size:1rem;color:var(--purple);}
+.match-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.match-card{background:linear-gradient(135deg,var(--purple),var(--pink));border-radius:14px;height:85px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;box-shadow:0 4px 12px rgba(0,0,0,.2);}
+.match-card.revealed{background:#fff;border:3px solid var(--purple);}
+.match-card.matched{background:linear-gradient(135deg,var(--green),var(--teal));pointer-events:none;}
+.match-card .card-back{font-size:1.8rem;color:#fff;}
+.match-card .card-front{font-size:1.4rem;text-align:center;padding:4px;display:none;font-weight:700;}
+.match-card.revealed .card-back,.match-card.matched .card-back{display:none;}
+.match-card.revealed .card-front,.match-card.matched .card-front{display:block;color:inherit;}
+.match-card.matched .card-front{color:#fff;}
+.sort-container{max-width:680px;margin:0 auto;}
+.sort-title{text-align:center;font-family:'Fredoka One',cursive;font-size:1.7rem;color:var(--purple);margin-bottom:18px;}
+.sort-items{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:22px;min-height:75px;background:#f9f9f9;border-radius:18px;padding:14px;border:3px dashed #ddd;}
+.sort-item{background:linear-gradient(135deg,#FF6B35,#FF6B9D);color:#fff;border:none;border-radius:14px;padding:9px 16px;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.2);font-family:'Nunito',sans-serif;transition:all .3s;}
+.sort-item:hover{transform:scale(1.1);}
+.sort-bins{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.sort-bin{background:#fff;border-radius:18px;padding:14px;min-height:110px;box-shadow:0 4px 18px rgba(0,0,0,.1);border:4px solid transparent;transition:all .3s;}
+.sort-bin.bin-power{border-color:var(--blue);} .sort-bin.bin-no{border-color:var(--red);}
+.sort-bin h4{font-family:'Fredoka One',cursive;font-size:1.1rem;text-align:center;margin-bottom:9px;padding-bottom:7px;border-bottom:2px solid #eee;}
+.bin-power h4{color:var(--blue);} .bin-no h4{color:var(--red);}
+.sort-bin .bin-items{display:flex;flex-wrap:wrap;gap:7px;min-height:55px;}
+.sort-btn{display:block;margin:18px auto 0;background:linear-gradient(135deg,var(--green),var(--teal));color:#fff;border:none;border-radius:22px;padding:11px 28px;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;transition:all .3s;}
+.sort-btn:hover{transform:scale(1.05);}
+.sort-result{text-align:center;font-family:'Fredoka One',cursive;font-size:1.3rem;margin-top:14px;display:none;}
+
+/* ===== SCIENCE STAR ===== */
+.star-section{background:linear-gradient(135deg,#7B2FBE18,#FF6B9D18);border-radius:22px;padding:28px;margin-bottom:28px;}
+.star-section h2{font-family:'Fredoka One',cursive;font-size:2rem;color:var(--purple);margin-bottom:18px;}
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:4px;background:linear-gradient(var(--purple),var(--pink));}
+.tl-item{position:relative;margin-bottom:22px;}
+.tl-dot{position:absolute;left:-24px;width:18px;height:18px;border-radius:50%;background:var(--yellow);border:3px solid var(--purple);top:4px;}
+.tl-content{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.1);}
+.tl-date{font-weight:800;color:var(--purple);font-size:.9rem;margin-bottom:4px;}
+.tl-event{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--orange);}
+.tl-desc{font-size:.87rem;color:#666;margin-top:4px;}
+
+/* ===== MODAL ===== */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:1000;justify-content:center;align-items:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fff;border-radius:22px;padding:28px;max-width:480px;width:90%;max-height:80vh;overflow-y:auto;position:relative;animation:popIn .3s ease;}
+@keyframes popIn{0%{transform:scale(.8);opacity:0}100%{transform:scale(1);opacity:1}}
+.modal-close{position:absolute;top:14px;right:14px;background:var(--red);color:#fff;border:none;border-radius:50%;width:32px;height:32px;font-size:1.2rem;cursor:pointer;font-family:'Fredoka One',cursive;}
+.modal-box h2{font-family:'Fredoka One',cursive;font-size:1.9rem;color:var(--purple);margin-bottom:13px;}
+.modal-box .m-icon{font-size:3.8rem;text-align:center;display:block;margin-bottom:13px;}
+.fact-list{list-style:none;padding:0;}
+.fact-list li{background:#f0e8ff;border-radius:11px;padding:9px 13px;margin-bottom:9px;font-weight:700;color:#555;font-size:.9rem;}
+.fact-list li::before{content:'⭐ ';}
+
+/* ===== CONFETTI ===== */
+.confetti-wrap{position:fixed;pointer-events:none;z-index:9999;top:0;left:0;width:100%;height:100%;}
+.c-piece{position:absolute;width:10px;height:10px;border-radius:2px;animation:fall 3s ease-out forwards;}
+@keyframes fall{0%{transform:translateY(-100px) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+/* ===== UTILS ===== */
+.fun-divider{text-align:center;font-size:2rem;margin:22px 0;letter-spacing:8px;}
+.btn-primary{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border:none;border-radius:22px;padding:13px 30px;font-family:'Fredoka One',cursive;font-size:1.15rem;cursor:pointer;transition:all .3s;box-shadow:0 4px 14px rgba(0,0,0,.2);}
+.btn-primary:hover{transform:scale(1.06);}
+footer{background:linear-gradient(135deg,#0f0c29,#302b63);color:#fff;text-align:center;padding:22px;font-family:'Fredoka One',cursive;font-size:1.05rem;}
+
+@media(max-width:600px){
+  .main-title{font-size:2rem;}
+  .quiz-opts{grid-template-columns:1fr;}
+  .match-grid{grid-template-columns:repeat(3,1fr);}
+  .sort-bins{grid-template-columns:1fr;}
+  .exp-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== CREATIVE HEADER ===== -->
+<header>
+  <div class="header-bg"></div>
+  <div class="stars-layer" id="starsLayer"></div>
+  <div class="planet1">🪐</div>
+  <div class="planet2"></div>
+  <div class="planet3"></div>
+  <div class="comet"></div>
+  <div class="header-content">
+    <div class="title-badge">🔬 ABQ · Sohar International School · KS1</div>
+    <div style="margin-bottom:10px"><span class="rocket-float">🚀</span></div>
+    <div class="main-title">Science with Miss Mahnoor</div>
+    <div class="subtitle">✨ Where Curiosity Meets Discovery ✨</div>
+    <div class="header-pills">
+      <span class="h-pill">⭐ Grade 1</span>
+      <span class="h-pill">🚀 Grade 2</span>
+      <span class="h-pill">🧪 100 Experiments</span>
+      <span class="h-pill">🎮 Fun Games</span>
+      <span class="h-pill">🏆 Science Star</span>
+    </div>
+    <button class="btn-primary" onclick="showSection('home')" style="font-size:1rem;padding:10px 24px">🌟 Start Your Adventure!</button>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 60" fill="none"><path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FFF9F0"/></svg>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <button class="nav-home" onclick="showSection('home')">🏠 Home</button>
+  <button class="nav-g1" onclick="showSection('grade1')">⭐ Grade 1</button>
+  <button class="nav-g2" onclick="showSection('grade2')">🚀 Grade 2</button>
+  <button class="nav-vocab" onclick="showSection('vocab')">📚 Words</button>
+  <button class="nav-games" onclick="showSection('games')">🎮 Games</button>
+  <button class="nav-exp" onclick="showSection('experiments')">🧪 Experiments</button>
+  <button class="nav-star" onclick="showSection('starcomp')">🏆 Science Star</button>
+</nav>
+
+<!-- ===== HOME ===== -->
+<section id="home" class="active">
+  <div style="text-align:center;padding:20px 0 10px">
+    <h2 style="font-family:'Fredoka One',cursive;font-size:2.6rem;color:var(--purple)">Welcome, Science Heroes! 🦸‍♀️🦸‍♂️</h2>
+    <p style="font-size:1.1rem;color:#666;max-width:580px;margin:10px auto">Get ready to explore amazing science, play fun games, and become a Science Star!</p>
+  </div>
+  <div class="hero-cards">
+    <div class="hero-card hc1" onclick="showSection('grade1')"><span class="hc-icon">⭐</span><h3>Grade 1</h3><p>Ice, Plants, Magnets & Shadows</p></div>
+    <div class="hero-card hc2" onclick="showSection('grade2')"><span class="hc-icon">🚀</span><h3>Grade 2</h3><p>Electricity & PBL Projects</p></div>
+    <div class="hero-card hc3" onclick="showSection('vocab')"><span class="hc-icon">📖</span><h3>Word Wall</h3><p>Learn science words!</p></div>
+    <div class="hero-card hc4" onclick="showSection('games')"><span class="hc-icon">🎮</span><h3>Fun Games</h3><p>Quiz, Match & Sort!</p></div>
+    <div class="hero-card hc5" onclick="showSection('experiments')"><span class="hc-icon">🧪</span><h3>100 Experiments</h3><p>Try at home today!</p></div>
+    <div class="hero-card hc6" onclick="showSection('starcomp')"><span class="hc-icon">🏆</span><h3>Science Star</h3><p>Competition calendar!</p></div>
+  </div>
+  <div class="fun-divider">🌱 💧 ☀️ 🧲 💡 🔬 ⚡ 🌍</div>
+  <div style="background:#fff;border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(0,0,0,.1);max-width:620px;margin:0 auto;text-align:center;">
+    <h3 style="font-family:'Fredoka One',cursive;font-size:1.7rem;color:var(--purple);margin-bottom:12px">🏆 Science Star Competition!</h3>
+    <p style="font-size:.95rem;color:#666;margin-bottom:15px">An exciting STEM competition for Grade 1 & Grade 2 — April & May!</p>
+    <button class="btn-primary" onclick="showSection('starcomp')">See the Calendar! 📅</button>
+  </div>
+</section>
+
+<!-- ===== GRADE 1 ===== -->
+<section id="grade1">
+  <h2 class="section-title" style="color:var(--orange)">⭐ Grade 1 Science</h2>
+  <p class="section-sub">Click a topic to discover fun facts!</p>
+  <div class="topic-grid">
+    <div class="topic-card tc-ice" onclick="openModal('ice')"><div class="t-icon">🧊</div><h3>Melting Ice</h3><p>What happens when ice gets hot?</p></div>
+    <div class="topic-card tc-plant" onclick="openModal('plant')"><div class="t-icon">🌱</div><h3>Plant Growth</h3><p>What do plants need to grow?</p></div>
+    <div class="topic-card tc-magnet" onclick="openModal('magnet')"><div class="t-icon">🧲</div><h3>Magnets</h3><p>Which things does a magnet attract?</p></div>
+    <div class="topic-card tc-light" onclick="openModal('light')"><div class="t-icon">💡</div><h3>Light & Shadows</h3><p>How are shadows made?</p></div>
+  </div>
+  <div class="fun-divider" style="margin:28px 0">🌟 💫 ⭐ 🌟 💫</div>
+  <div style="background:linear-gradient(135deg,#FF6B3515,#F1C40F15);border-radius:22px;padding:22px;">
+    <h3 style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--orange);margin-bottom:14px">🎯 Round 1: Science Preparation</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:13px;">
+      <div style="background:#fff;border-radius:14px;padding:14px;border-left:5px solid var(--blue)"><b>🧊 Melting Ice</b><br><small style="color:#666">Ice melts when it gets heat and turns into water.</small></div>
+      <div style="background:#fff;border-radius:14px;padding:14px;border-left:5px solid var(--green)"><b>🌱 Plant Growth</b><br><small style="color:#666">Plants need sunlight, water, air, and soil.</small></div>
+      <div style="background:#fff;border-radius:14px;padding:14px;border-left:5px solid var(--red)"><b>🧲 Magnets</b><br><small style="color:#666">Magnets attract metal objects like pins and paper clips.</small></div>
+      <div style="background:#fff;border-radius:14px;padding:14px;border-left:5px solid var(--yellow)"><b>💡 Light & Shadows</b><br><small style="color:#666">Shadows form when light is blocked by an object.</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GRADE 2 ===== -->
+<section id="grade2">
+  <h2 class="section-title" style="color:var(--green)">🚀 Grade 2 Science</h2>
+  <p class="section-sub">Electricity, PBL Projects & Amazing Adventures!</p>
+  <div class="topic-grid" style="margin-bottom:28px">
+    <div class="topic-card tc-elec" onclick="openModal('elec')"><div class="t-icon">⚡</div><h3>What is Electricity?</h3><p>Powers our lamps, fans and toys!</p></div>
+    <div class="topic-card tc-circuit" onclick="openModal('circuit')"><div class="t-icon">🔌</div><h3>Circuits</h3><p>Open & Closed — when does the light turn on?</p></div>
+    <div class="topic-card tc-lamp" onclick="openModal('lamp')"><div class="t-icon">🪔</div><h3>The Electric Lamp</h3><p>Shade, Base, Wire, Bulb — learn the parts!</p></div>
+    <div class="topic-card tc-city" onclick="openModal('city')"><div class="t-icon">🏙️</div><h3>City at Night</h3><p>Use electricity to light up a whole city!</p></div>
+  </div>
+  <div class="pbl-section">
+    <h3>📚 Grade 2 PBL Projects — The World That Never Goes Dark</h3>
+    <div style="background:linear-gradient(135deg,#2ECC7118,#1ABC9C18);border-radius:18px;padding:18px;margin-bottom:18px;"><p style="font-size:.95rem;color:#555"><b>🏙️</b> Grade 2 students explore electricity through an exciting multi-week project-based learning adventure! Driving Question: <em>How can simple circuits help people when electricity is not available?</em></p></div>
+    <div class="pbl-grid">
+      <div class="pbl-card" style="border-left-color:var(--purple)"><div class="week-badge" style="background:var(--purple)">Week 1</div><div class="p-icon">🏙️</div><h4>Team Formation & City Planning</h4><p>Form your team! Discover what electricity does. Sort items: needs power / no power.</p></div>
+      <div class="pbl-card" style="border-left-color:var(--blue)"><div class="week-badge" style="background:var(--blue)">Week 2</div><div class="p-icon">⚡</div><h4>Electricity Safety & Circuits</h4><p>Learn safety rules! Build open and closed circuits. Make a lightbulb glow! ⚠️ Water + Electricity = DANGER!</p></div>
+      <div class="pbl-card" style="border-left-color:var(--orange)"><div class="week-badge" style="background:var(--orange)">Week 3</div><div class="p-icon">🏗️</div><h4>Building the Electrified City</h4><p>Connect circuits to buildings. Light up the hospital, police station and homes. Series circuits!</p></div>
+      <div class="pbl-card" style="border-left-color:var(--green)"><div class="week-badge" style="background:var(--green)">Week 4</div><div class="p-icon">🌆</div><h4>The Giant Electrified City!</h4><p>3… 2… 1… POWER UP! Present your electrified city and show circuits help people!</p></div>
+      <div class="pbl-card" style="border-left-color:var(--pink)"><div class="p-icon">🪔</div><h4>Electric Art Adventure — Lumi's Lamp</h4><p>Meet Lumi! Design a lamp with colors and shapes. Decorate the shade, make the base strong, connect the wire!</p></div>
+      <div class="pbl-card" style="border-left-color:var(--yellow)"><div class="p-icon">🌃</div><h4>City at Night Art Project</h4><p>Paint the sky blue, cut black buildings, add yellow window squares — Let There Be Light!</p></div>
+      <div class="pbl-card" style="border-left-color:var(--teal)"><div class="p-icon">🤖</div><h4>Electric Math Adventure</h4><p>Help the robot fix the school generator using counting, addition, subtraction, shapes & reflections!</p></div>
+      <div class="pbl-card" style="border-left-color:var(--blue)"><div class="p-icon">💻</div><h4>Electrical Story in Scratch</h4><p>Be a Super Coder! Snap a photo of an electrical object, upload to Scratch, make your hero tell the story!</p></div>
+    </div>
+    <div style="background:#fff3cd;border:3px solid var(--yellow);border-radius:18px;padding:18px;">
+      <h4 style="font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--orange);margin-bottom:10px">⚠️ Electrical Safety Rules!</h4>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;">
+        <div style="background:#fff;border-radius:11px;padding:11px;border-left:4px solid var(--red)">🚫 <b>Rule 1:</b> Electricity + Water = DANGER! Keep them apart!</div>
+        <div style="background:#fff;border-radius:11px;padding:11px;border-left:4px solid var(--red)">⚡ <b>Rule 2:</b> Never touch broken wires! Tell a grown-up!</div>
+        <div style="background:#fff;border-radius:11px;padding:11px;border-left:4px solid var(--red)">🤚 <b>Rule 3:</b> Never touch plugs with wet hands!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VOCABULARY ===== -->
+<section id="vocab">
+  <h2 class="section-title" style="color:var(--pink)">📚 Science Word Wall</h2>
+  <p class="section-sub">Tap a card to reveal the meaning! 🌟</p>
+  <div class="vocab-filter">
+    <button class="vf-btn active" style="background:var(--purple);color:#fff" onclick="filterVocab('all',this)">All Words</button>
+    <button class="vf-btn" style="background:var(--orange);color:#fff" onclick="filterVocab('g1',this)">⭐ Grade 1</button>
+    <button class="vf-btn" style="background:var(--green);color:#fff" onclick="filterVocab('g2',this)">🚀 Grade 2</button>
+    <button class="vf-btn" style="background:var(--blue);color:#fff" onclick="filterVocab('elec',this)">⚡ Electricity</button>
+  </div>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<!-- ===== EXPERIMENTS ===== -->
+<section id="experiments">
+  <div class="exp-header">
+    <h2>🧪 100 Home Experiments!</h2>
+    <p style="color:#888;font-size:1rem;margin-top:8px">Easy experiments to try at home with simple materials! Click any card to see instructions.</p>
+  </div>
+  <div class="exp-cats" id="expCats"></div>
+  <input class="exp-search" type="text" placeholder="🔍 Search experiments..." oninput="filterExps(this.value)" id="expSearch">
+  <div class="exp-count" id="expCount">Showing all 100 experiments 🔬</div>
+  <div class="exp-grid" id="expGrid"></div>
+</section>
+
+<!-- ===== GAMES ===== -->
+<section id="games">
+  <h2 class="section-title" style="color:var(--blue)">🎮 Science Fun Games!</h2>
+  <p class="section-sub">Play, learn and become a Science Star!</p>
+  <div class="game-tabs">
+    <button class="gt-btn active" onclick="showGame('quiz',this)">🧠 Science Quiz</button>
+    <button class="gt-btn" onclick="showGame('match',this)">🃏 Memory Match</button>
+    <button class="gt-btn" onclick="showGame('sort',this)">🗂️ Sort It!</button>
+  </div>
+  <div class="game-area active" id="game-quiz"><div class="quiz-container" id="quizContainer"></div></div>
+  <div class="game-area" id="game-match">
+    <div class="match-container">
+      <div class="match-score-bar"><span>🃏 Memory Match</span><span id="matchMoves">Moves: 0</span><span id="matchPairs">Pairs: 0/6</span></div>
+      <p style="text-align:center;font-size:.95rem;font-weight:700;color:#888;margin-bottom:14px">Find the matching pairs! Click two cards. 🎯</p>
+      <div class="match-grid" id="matchGrid"></div>
+      <button class="sort-btn" onclick="initMatch()">🔄 New Game</button>
+    </div>
+  </div>
+  <div class="game-area" id="game-sort">
+    <div class="sort-container">
+      <div class="sort-title">⚡ Sort It — Needs Power or No Power?</div>
+      <div class="sort-items" id="sortItems"></div>
+      <div class="sort-bins">
+        <div class="sort-bin bin-power"><h4>⚡ Needs Electricity!</h4><div class="bin-items" id="binPower"></div></div>
+        <div class="sort-bin bin-no"><h4>🚫 No Electricity Needed</h4><div class="bin-items" id="binNo"></div></div>
+      </div>
+      <div class="sort-result" id="sortResult"></div>
+      <button class="sort-btn" onclick="initSort()">🔄 Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCIENCE STAR ===== -->
+<section id="starcomp">
+  <h2 class="section-title" style="color:var(--purple)">🏆 Science Star Competition!</h2>
+  <p class="section-sub">Journey to Becoming a Science Star — Grade 1 & Grade 2 🌟</p>
+  <div class="star-section">
+    <h2>📅 Competition Calendar</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Wednesday, 8 April</div><div class="tl-event">🔬 Round 1 — Science Preparation</div><div class="tl-desc">Answer simple picture questions. Topics: Melting Ice, Plant Growth, Magnets, Light & Shadows.</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Wednesday, 15 April</div><div class="tl-event">💻 Round 2 — Technology Quiz</div><div class="tl-desc">Google Form quiz on Chromebooks! Learn vocabulary + identify pictures. Highest scorer goes to Semifinals!</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Wednesday, 22 April</div><div class="tl-event">🏗️ Semi Finals — Engineering Challenge</div><div class="tl-desc">Build a Strong Bridge using paper, cardboard, straws and tape. 30 minutes. Judged on strength, design & stability.</div></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">Wednesday, 29 April</div><div class="tl-event">🔺 Final Round — Shapes in Nature</div><div class="tl-desc">Mathematics & Biology! Identify shapes in nature: honeycomb, starfish, flowers. 10 minutes time limit.</div></div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div class="tl-content" style="border:2px solid var(--green)"><div class="tl-date" style="color:var(--green)">Tuesday, 4 May</div><div class="tl-event" style="color:var(--green)">🏅 Grade 1 Awards Ceremony</div><div class="tl-desc">Parents welcome! Celebrating our Science Stars! 🎉</div></div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--purple)"></div><div class="tl-content" style="border:2px solid var(--purple)"><div class="tl-date" style="color:var(--purple)">Wednesday, 5 May</div><div class="tl-event" style="color:var(--purple)">🏅 Grade 2 Awards Ceremony</div><div class="tl-desc">Parents welcome! Celebrating our Science Stars! 🎉</div></div></div>
+    </div>
+  </div>
+  <div style="background:linear-gradient(135deg,#3498DB18,#1ABC9C18);border-radius:22px;padding:24px;">
+    <h3 style="font-family:'Fredoka One',cursive;font-size:1.7rem;color:var(--blue);margin-bottom:18px">🧪 Science Week — April 13–16!</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;">
+      <div style="background:#fff;border-radius:16px;padding:14px;border-top:5px solid var(--orange)"><div style="font-size:1.8rem;margin-bottom:6px">🏗️</div><div style="font-family:'Fredoka One',cursive;color:var(--orange)">Mon Apr 13</div><div style="font-weight:800">Master Builders</div><div style="font-size:.82rem;color:#666;margin-top:4px">STEAM Competition. Bring your Science Project. Lab Coat!</div></div>
+      <div style="background:#fff;border-radius:16px;padding:14px;border-top:5px solid var(--purple)"><div style="font-size:1.8rem;margin-bottom:6px">🌌</div><div style="font-family:'Fredoka One',cursive;color:var(--purple)">Tue Apr 14</div><div style="font-weight:800">Neon Galaxy!</div><div style="font-size:.82rem;color:#666;margin-top:4px">Wear black shirt & trousers. Science glows in the dark!</div></div>
+      <div style="background:#fff;border-radius:16px;padding:14px;border-top:5px solid var(--blue)"><div style="font-size:1.8rem;margin-bottom:6px">🤖</div><div style="font-family:'Fredoka One',cursive;color:var(--blue)">Wed Apr 15</div><div style="font-weight:800">AI Day</div><div style="font-size:.82rem;color:#666;margin-top:4px">Meet smart computers! Bring a Robot or Tech Toy.</div></div>
+      <div style="background:#fff;border-radius:16px;padding:14px;border-top:5px solid var(--green)"><div style="font-size:1.8rem;margin-bottom:6px">🧪</div><div style="font-family:'Fredoka One',cursive;color:var(--green)">Thu Apr 16</div><div style="font-weight:800">The Mad Lab!</div><div style="font-size:.82rem;color:#666;margin-top:4px">Science Experiments! Wear Mad Scientist Attire.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<footer>
+  🔬 Science with Miss Mahnoor &nbsp;|&nbsp; ABQ Sohar International School 🌟<br>
+  <span style="font-size:.85rem;opacity:.7">KS1 Science Teacher · Grade 1 & Grade 2 · Keep Exploring! 🚀</span>
+</footer>
+
+<script>
+// ===== STARS BACKGROUND =====
+(function(){
+  const layer=document.getElementById('starsLayer');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');s.className='star-dot';
+    const sz=Math.random()*3+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${2+Math.random()*3}s;`;
+    layer.appendChild(s);
+  }
+})();
+
+// ===== NAVIGATION =====
+function showSection(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='games'){initQuiz();}
+  if(id==='vocab'){renderVocab('all');}
+  if(id==='experiments'){renderExps('All');}
+}
+
+// ===== TOPIC MODALS =====
+const topics={
+  ice:{icon:'🧊',title:'Melting Ice',facts:['Ice is frozen water ❄️','Heat makes ice melt 🔥','Ice turns into LIQUID water 💧','Water can freeze back to ice when cold!','Ice melts faster in the sun ☀️','Scientists call this: changing state!']},
+  plant:{icon:'🌱',title:'Plant Growth',facts:['Plants need SUNLIGHT ☀️','Plants need WATER 💧','Plants need AIR 🌬️','Plants need SOIL 🌍','Roots drink water from the soil 🪴','Leaves make food using sunlight!']},
+  magnet:{icon:'🧲',title:'Magnets',facts:['Magnets ATTRACT metal objects 🔩','They attract pins and paper clips 📎','Wood, plastic & fabric do NOT attract 🪵','Magnets have North and South poles 🔴🔵','Opposite poles attract, same poles repel!','Earth itself is a giant magnet! 🌍']},
+  light:{icon:'💡',title:'Light & Shadows',facts:['Light travels in a STRAIGHT line 📏','When an object BLOCKS light → shadow forms 🌑','Bigger objects = bigger shadows!','Shadow is on the OPPOSITE side from light 🔦','At noon, shadows are SHORT','Morning & evening shadows are LONG ↔️']},
+  elec:{icon:'⚡',title:'What is Electricity?',facts:['Electricity gives us POWER ⚡','It travels from power stations through wires 🏭','Makes fans spin, lamps glow, food cook!','Long ago, people used candles & fire 🕯️','SAFETY: Never touch plugs with wet hands! 💧','Batteries store electricity for toys 🔋']},
+  circuit:{icon:'🔌',title:'Circuits',facts:['A circuit is a PATH for electricity 🔄','CLOSED circuit = electricity flows = light ON ✅','OPEN circuit = electricity stops = light OFF ❌','A SWITCH opens & closes the circuit 🔛','Parts: Battery + Wire + Bulb 🔋','Series circuit: lamps chained in a row!']},
+  lamp:{icon:'🪔',title:'The Electric Lamp',facts:['The SHADE is like a hat for the bulb 🎩','The BASE holds the lamp up — strong feet! 🦶','The WIRE is the secret path for electricity ⚡','Electricity travels through wire to bulb 💡','The BULB turns electricity into LIGHT 🌟','You can decorate the shade with patterns! 🎨']},
+  city:{icon:'🏙️',title:'City at Night',facts:['Cities use electricity to stay bright at night! 🌃','Step 1: Paint the sky BLUE 🔵','Step 2: Cut BLACK paper buildings 🏢','Step 3: Add YELLOW squares for windows 💛','Without electricity, cities are DARK 🌑','Electricity helps hospitals, police & homes!']},
+};
+function openModal(key){
+  const t=topics[key];if(!t)return;
+  document.getElementById('modalContent').innerHTML=`<span class="m-icon">${t.icon}</span><h2>${t.title}</h2><ul class="fact-list">${t.facts.map(f=>`<li>${f}</li>`).join('')}</ul>`;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(e){if(!e||e.target===document.getElementById('modal'))document.getElementById('modal').classList.remove('open');}
+
+// ===== VOCABULARY =====
+const vocabWords=[
+  {icon:'🧊',word:'Ice',def:'Frozen water. It is very cold and hard!',cat:'g1'},
+  {icon:'💧',word:'Melt',def:'When ice gets warm it melts into liquid water.',cat:'g1'},
+  {icon:'☀️',word:'Sunlight',def:'Light that comes from the Sun. Plants love it!',cat:'g1'},
+  {icon:'🌱',word:'Seed',def:'A tiny thing that grows into a big plant.',cat:'g1'},
+  {icon:'🌍',word:'Soil',def:'Dirt in the ground. Plants grow their roots in soil.',cat:'g1'},
+  {icon:'🧲',word:'Magnet',def:'A special object that attracts metal things.',cat:'g1'},
+  {icon:'📎',word:'Attract',def:'To pull something closer. Magnets attract metal!',cat:'g1'},
+  {icon:'🌑',word:'Shadow',def:'A dark shape made when an object blocks light.',cat:'g1'},
+  {icon:'💡',word:'Light',def:'Energy we can see. The Sun and bulbs give light.',cat:'g1'},
+  {icon:'🪴',word:'Roots',def:'Parts of a plant underground that drink water.',cat:'g1'},
+  {icon:'🌿',word:'Stem',def:'The tall part of a plant that holds it up.',cat:'g1'},
+  {icon:'⚡',word:'Electricity',def:'Energy that powers lights, fans, and toys!',cat:['g2','elec']},
+  {icon:'🔋',word:'Battery',def:'A cell that gives power to electrical things.',cat:['g2','elec']},
+  {icon:'〰️',word:'Wire',def:'A thin metal path for electricity to travel along.',cat:['g2','elec']},
+  {icon:'💡',word:'Bulb',def:'The part that turns electricity into light.',cat:['g2','elec']},
+  {icon:'🔛',word:'Switch',def:'Controls electricity. ON = closed, OFF = open!',cat:['g2','elec']},
+  {icon:'🔄',word:'Circuit',def:'The complete path electricity travels in a loop.',cat:['g2','elec']},
+  {icon:'✅',word:'Closed Circuit',def:'A complete path — electricity flows, light is ON!',cat:['g2','elec']},
+  {icon:'❌',word:'Open Circuit',def:'A broken path — electricity cannot flow, light OFF.',cat:['g2','elec']},
+  {icon:'🔌',word:'Component',def:'A part of a circuit e.g. battery, wire, bulb.',cat:['g2','elec']},
+  {icon:'🌡️',word:'Heat',def:'Energy that makes things warm or hot.',cat:'g1'},
+  {icon:'🌊',word:'Water',def:'A liquid. Ice melts into water!',cat:'g1'},
+  {icon:'🌬️',word:'Air',def:'The gas all around us. Plants and animals need air.',cat:'g1'},
+];
+function renderVocab(cat){
+  const g=document.getElementById('vocabGrid');g.innerHTML='';
+  const cols=['#7B2FBE','#FF6B35','#2ECC71','#3498DB','#FF6B9D','#1ABC9C'];
+  vocabWords.filter(w=>cat==='all'||w.cat===cat||(Array.isArray(w.cat)&&w.cat.includes(cat))).forEach(w=>{
+    const el=document.createElement('div');el.className='vocab-card';
+    el.style.borderColor=cols[Math.floor(Math.random()*cols.length)];
+    el.innerHTML=`<div class="v-icon">${w.icon}</div><h4>${w.word}</h4><p>${w.def}</p>`;
+    el.onclick=()=>el.classList.toggle('flipped');
+    g.appendChild(el);
+  });
+}
+function filterVocab(cat,btn){
+  document.querySelectorAll('.vf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderVocab(cat);
+}
+
+// ===== 100 EXPERIMENTS =====
+const experiments=[
+  // WATER & ICE
+  {id:1,emoji:'🧊',title:'Ice Cube Melt Race',cat:'Water & Ice',diff:'Easy',materials:['2 ice cubes','2 plates','A warm spot & a cold spot'],steps:['Put one ice cube on each plate.','Place one plate in a warm spot (sunny window).','Place the other in a cool spot (shade).','Watch and compare! Which melts first?'],wow:'Heat makes ice melt faster! Energy changes ice from solid to liquid.'},
+  {id:2,emoji:'💧',title:'Sink or Float?',cat:'Water & Ice',diff:'Easy',materials:['A big bowl of water','Small objects: coin, leaf, sponge, stone, plastic toy'],steps:['Fill the bowl with water.','Hold each object above the water.','Predict: will it sink or float?','Drop it in and see if you were right!'],wow:'Light objects float! Heavy dense objects sink.'},
+  {id:3,emoji:'🌡️',title:'Ice Tray Rainbow',cat:'Water & Ice',diff:'Easy',materials:['Ice tray','Water','Food colouring (3 colours)'],steps:['Fill the ice tray with water.','Add a different food colour to each row.','Put in the freezer for 2 hours.','Pop out the coloured ice and observe!'],wow:'Water freezes at 0°C (32°F). Colour does NOT melt out first!'},
+  {id:4,emoji:'🧂',title:'Salt & Ice Experiment',cat:'Water & Ice',diff:'Easy',materials:['Ice cubes','Salt','A plate'],steps:['Place ice cubes on a plate.','Sprinkle salt on half the ice.','Wait 5 minutes.','Compare the salted and unsalted ice!'],wow:'Salt lowers the melting point of ice. That is why salt is put on icy roads!'},
+  {id:5,emoji:'🌊',title:'Walking Water',cat:'Water & Ice',diff:'Easy',materials:['3 cups','Food colouring (red, blue)','Paper towels'],steps:['Fill cup 1 with red water, cup 3 with blue.','Leave cup 2 empty in the middle.','Fold paper towels and put one end in each cup.','Wait 30 minutes and watch water walk!'],wow:'Water moves through paper towel by capillary action — the same way plants drink!'},
+  {id:6,emoji:'🫧',title:'Magic Raisins Dance',cat:'Water & Ice',diff:'Easy',materials:['A glass','Fizzy water (sparkling)','Raisins'],steps:['Fill glass with sparkling water.','Drop in a few raisins.','Watch what happens!','The raisins dance up and down!'],wow:'Bubbles (CO2 gas) attach to raisins and lift them up. When bubbles pop, raisins sink again!'},
+  // PLANTS
+  {id:7,emoji:'🌱',title:'Bean in a Bag',cat:'Plants',diff:'Easy',materials:['A zip-lock bag','Damp cotton wool or paper towel','A bean/seed'],steps:['Wet the cotton wool — squeeze out extra water.','Put it in the bag with the bean.','Tape the bag to a sunny window.','Check every day — you will see roots and a shoot!'],wow:'Seeds sprout (germinate) when they have water and warmth. They do not need soil at first!'},
+  {id:8,emoji:'🌻',title:'Which Way Does It Grow?',cat:'Plants',diff:'Easy',materials:['A bean seed','A damp paper towel','A zip-lock bag'],steps:['Put bean in damp paper towel.','Place in the bag with the bean on its side.','After it sprouts, turn the bag upside down.','The root will turn to grow DOWN and the shoot UP!'],wow:'Roots grow DOWN (gravitropism) and shoots grow UP towards light (phototropism)!'},
+  {id:9,emoji:'🌈',title:'Coloured Celery',cat:'Plants',diff:'Easy',materials:['White celery stalk with leaves','Food colouring','A glass of water'],steps:['Add 10 drops of food colouring to water.','Put the celery in the coloured water.','Wait overnight.','Look at the leaves — they changed colour!'],wow:'Plants drink water through their stems up to their leaves — just like a straw!'},
+  {id:10,emoji:'☀️',title:'Does a Plant Need Light?',cat:'Plants',diff:'Easy',materials:['2 small plants or seedlings','1 dark box','Water'],steps:['Water both plants the same amount.','Put one in sunlight, cover the other with a box.','Check every day for one week.','Compare the two plants!'],wow:'Without light, a plant cannot make food (photosynthesis). It will turn yellow and weak!'},
+  {id:11,emoji:'🌍',title:'Soil vs. Sand Growth',cat:'Plants',diff:'Easy',materials:['2 cups','Soil (one)','Sand (one)','Same seeds for both','Water'],steps:['Plant the same seeds in both cups.','Water them the same amount every day.','Put both in sunlight.','Observe which grows better after 1 week!'],wow:'Soil has nutrients (food) that plants need. Sand does not have enough nutrients!'},
+  {id:12,emoji:'🍃',title:'Leaf Rubbing Art',cat:'Plants',diff:'Easy',materials:['Different leaves','White paper','Crayons'],steps:['Place a leaf flat on the table.','Put paper on top.','Rub a crayon sideways over the paper.','You can see the leaf veins!'],wow:'Veins in leaves carry water and food to all parts of the leaf!'},
+  // MAGNETS
+  {id:13,emoji:'🧲',title:'Magnet Treasure Hunt',cat:'Magnets',diff:'Easy',materials:['A magnet','Objects around the house: spoon, pencil, coin, paper clip, eraser, tin'],steps:['Collect 10 different objects.','Predict: which will a magnet attract?','Touch the magnet to each object.','Sort into two groups: attracted / not attracted.'],wow:'Magnets attract things made of IRON, STEEL and NICKEL — not all metals!'},
+  {id:14,emoji:'🎣',title:'Magnet Fishing Game',cat:'Magnets',diff:'Easy',materials:['Magnet','String','A pencil (rod)','Paper fish with paper clips attached'],steps:['Cut out paper fish and attach a paper clip to each.','Tie a string to the pencil.','Tie the magnet to the string end.','Fish for your fish by dangling the magnet!'],wow:'The magnetic force passes through paper and air — it acts at a distance!'},
+  {id:15,emoji:'🧭',title:'Make a Compass',cat:'Magnets',diff:'Medium',materials:['A needle','A magnet','A leaf','Water in a bowl'],steps:['Stroke the needle with the magnet 30 times in one direction.','Float the leaf in the water bowl.','Gently place the needle on the leaf.','The needle will slowly point North!'],wow:'You magnetised the needle! Earth\'s magnetic field pulls it to point North-South.'},
+  {id:16,emoji:'📎',title:'Magnetic Chain',cat:'Magnets',diff:'Easy',materials:['A strong magnet','Many paper clips'],steps:['Touch one paper clip to the magnet.','Touch another paper clip to the first one.','Keep adding paper clips.','How long a chain can you make?'],wow:'Magnets can temporarily magnetise other metal objects — they become mini magnets!'},
+  {id:17,emoji:'🧲',title:'Magnets Through Water',cat:'Magnets',diff:'Easy',materials:['A magnet','A clear glass of water','Paper clips'],steps:['Drop a paper clip into the glass.','Hold the magnet on the outside of the glass.','Move the magnet up — the paper clip follows!','Try through different materials!'],wow:'Magnetic force passes through water and glass — it is not blocked by non-metal materials!'},
+  // LIGHT & SHADOWS
+  {id:18,emoji:'🌑',title:'Shadow Puppet Show',cat:'Light & Shadows',diff:'Easy',materials:['A torch or lamp','White wall or sheet','Your hands'],steps:['Turn off the lights.','Shine the torch at the wall.','Put your hands between torch and wall.','Make animal shapes with your fingers!'],wow:'Your hands block the light and make a shadow — the further from the wall, the bigger the shadow!'},
+  {id:19,emoji:'🔦',title:'Shadow Size Experiment',cat:'Light & Shadows',diff:'Easy',materials:['A torch','A small toy','Paper and pencil'],steps:['Shine the torch on the toy from far away.','Trace around the shadow.','Move the torch closer.','Trace the shadow again. What happened?'],wow:'Closer light source = BIGGER shadow! Further away = smaller shadow.'},
+  {id:20,emoji:'🌈',title:'Make a Rainbow',cat:'Light & Shadows',diff:'Easy',materials:['A glass of water','White paper','Bright sunshine'],steps:['Put the glass of water near a sunny window.','Hold white paper on the other side.','Move the paper until you see colours!','You made a rainbow!'],wow:'White sunlight contains ALL colours. Water bends the light and splits it into a rainbow!'},
+  {id:21,emoji:'🪞',title:'Mirror Reflections',cat:'Light & Shadows',diff:'Easy',materials:['A small mirror','A torch','White paper'],steps:['Darken the room.','Shine torch at the mirror.','Move mirror to aim light at the ceiling or wall.','Try to write your name in light on the wall!'],wow:'Mirrors REFLECT light — they bounce it back at the same angle it arrived!'},
+  {id:22,emoji:'☀️',title:'Sundial Clock',cat:'Light & Shadows',diff:'Medium',materials:['A paper plate','A pencil','Sticky tack'],steps:['Push pencil through centre of plate.','Place outside in the sun at 9am.','Mark the shadow every hour.','Come back the next day — tell the time with shadows!'],wow:'Ancient people used sundials to tell time before clocks were invented!'},
+  {id:23,emoji:'🔍',title:'Magnifying Glass Magic',cat:'Light & Shadows',diff:'Easy',materials:['A magnifying glass','Various objects: leaf, fabric, coin'],steps:['Hold the magnifying glass above an object.','Move it slowly up and down.','Find the distance where the image is clearest.','Examine tiny details you cannot normally see!'],wow:'A magnifying glass is a convex lens — it bends light to make things look bigger!'},
+  // ELECTRICITY
+  {id:24,emoji:'⚡',title:'Static Electricity Balloon',cat:'Electricity',diff:'Easy',materials:['A balloon','Your hair','Small pieces of paper'],steps:['Blow up the balloon.','Rub it on your hair for 30 seconds.','Hold balloon above tiny paper pieces.','Watch the paper pieces jump up!'],wow:'Rubbing creates STATIC electricity — a build-up of electric charge that attracts light objects!'},
+  {id:25,emoji:'💡',title:'Lemon Battery',cat:'Electricity',diff:'Medium',materials:['2 lemons','2 copper coins','2 zinc-coated nails','3 wires with clips','An LED bulb'],steps:['Push a coin and nail into each lemon.','Connect them: nail of lemon 1 to coin of lemon 2 with wire.','Attach the LED to the free nail and free coin.','The LED should glow!'],wow:'Lemons contain acid that reacts with the metals to produce a tiny electric current — a real battery!'},
+  {id:26,emoji:'⚡',title:'Static Electricity Butterfly',cat:'Electricity',diff:'Easy',materials:['Tissue paper','Scissors','A comb','Your hair'],steps:['Cut butterfly wings from tissue paper.','Place on a table.','Rub the comb through your hair.','Hold comb above the wings — they flutter!'],wow:'Static electricity can attract lightweight objects! The charged comb pulls the uncharged paper.'},
+  {id:27,emoji:'🌩️',title:'Mini Lightning Experiment',cat:'Electricity',diff:'Easy',materials:['A metal tray','A wool cloth','A metal fork','A dark room'],steps:['Rub the tray vigorously with the wool cloth.','In a dark room, bring your finger close to the edge of the tray.','A tiny spark will jump!','This is mini lightning!'],wow:'Lightning is a giant spark of static electricity jumping between clouds and the ground!'},
+  {id:28,emoji:'🔋',title:'Conductors vs Insulators',cat:'Electricity',diff:'Medium',materials:['A battery (1.5V AA)','An LED bulb','Wires','Objects: coin, pencil, rubber, wooden stick, key'],steps:['Make a simple circuit with battery, LED and wires.','Leave a gap in the circuit.','Place each object in the gap.','Bulb lights? The object conducts electricity!'],wow:'Metals conduct electricity. Rubber, wood and plastic are insulators — they block electricity!'},
+  // SOUND
+  {id:29,emoji:'🎵',title:'Rubber Band Guitar',cat:'Sound',diff:'Easy',materials:['A shoebox','4 rubber bands of different sizes'],steps:['Stretch rubber bands around the open box.','Pluck each rubber band.','Listen to the different sounds!','Try tightening the bands for higher notes.'],wow:'Sound is made by VIBRATION! Tighter/thinner bands vibrate faster = higher pitch!'},
+  {id:30,emoji:'📞',title:'Cup Telephone',cat:'Sound',diff:'Easy',materials:['2 paper cups','A long piece of string','A pencil'],steps:['Poke a hole in the bottom of each cup.','Thread string through and tie a knot.','Each person holds a cup — stretch the string tight.','Speak into one cup; the other person listens!'],wow:'Your voice vibrates through the cup into the string, all the way to the other cup!'},
+  {id:31,emoji:'🌊',title:'Sound Through Water',cat:'Sound',diff:'Easy',materials:['A large bowl of water','2 stones'],steps:['Fill bowl with water.','Put your ear close to the side of the bowl.','Have someone tap the two stones together gently underwater.','Can you hear it?'],wow:'Sound travels FASTER through water than through air — that is how whales communicate!'},
+  {id:32,emoji:'🥁',title:'Rice Drum Vibration',cat:'Sound',diff:'Easy',materials:['A metal baking tray','Cling film','A few grains of rice','A spoon'],steps:['Stretch cling film tightly over the baking tray.','Sprinkle a few grains of rice on top.','Hold tray near your mouth and shout loudly.','Watch the rice dance!'],wow:'Your voice makes sound waves that vibrate the cling film, causing the rice to jump!'},
+  {id:33,emoji:'🎶',title:'Water Xylophone',cat:'Sound',diff:'Easy',materials:['6 identical glasses','Water','A metal spoon'],steps:['Fill glasses with different amounts of water.','Tap each glass gently with the spoon.','Listen to the different notes!','Try to play a simple song!'],wow:'More water = slower vibration = lower note. Less water = faster vibration = higher note!'},
+  // WEATHER & AIR
+  {id:34,emoji:'🌬️',title:'Make a Pinwheel',cat:'Weather & Air',diff:'Easy',materials:['Square paper','A pencil','A pin or brad','Scissors'],steps:['Cut from each corner towards the centre — stop 1cm from middle.','Fold every other corner tip to the centre.','Pin through all layers and into the pencil eraser.','Blow on it — it spins!'],wow:'Moving air (wind) pushes the blades and creates rotation — just like a real windmill or wind turbine!'},
+  {id:35,emoji:'🌦️',title:'Make a Rain Gauge',cat:'Weather & Air',diff:'Easy',materials:['A clear plastic bottle','Ruler','Tape','Scissors'],steps:['Cut the bottle in half.','Invert the top into the bottom like a funnel.','Tape ruler on the side.','Leave outside during rain and measure the rainfall!'],wow:'Scientists measure rainfall in millimetres. This helps farmers plan and predict floods!'},
+  {id:36,emoji:'☁️',title:'Cloud in a Jar',cat:'Weather & Air',diff:'Medium',materials:['A glass jar','Hot water (ask an adult)','Ice cubes','Hairspray'],steps:['Pour 2cm of hot water in the jar.','Quickly spray a little hairspray inside.','Place ice on top of the jar.','Watch a cloud form inside!'],wow:'Warm moist air rises, cools near ice, and condenses into tiny droplets — exactly how real clouds form!'},
+  {id:37,emoji:'💨',title:'Air Has Weight',cat:'Weather & Air',diff:'Easy',materials:['2 balloons','A ruler','String'],steps:['Tie equal lengths of string to each end of the ruler.','Hang the ruler from its midpoint so it balances.','Tie an uninflated balloon to each end.','Now inflate one balloon and reattach — that end drops!'],wow:'Inflated balloon has more air = more weight. This proves air has mass!'},
+  {id:38,emoji:'🌪️',title:'Mini Tornado in a Bottle',cat:'Weather & Air',diff:'Easy',materials:['2 plastic bottles','Water','Tape','A little glitter (optional)'],steps:['Fill one bottle ¾ with water.','Add glitter if using.','Join the two bottles at the neck with tape.','Flip and swirl in a circular motion — watch the tornado!'],wow:'The swirling creates a vortex — just like a real tornado uses rotating air!'},
+  // CHEMISTRY (SAFE)
+  {id:39,emoji:'🌋',title:'Baking Soda Volcano',cat:'Chemistry',diff:'Easy',materials:['Baking soda (bicarbonate of soda)','Vinegar','A cup or bottle','Food colouring (optional)','Washing-up liquid (optional)'],steps:['Put 2 spoons of baking soda in the cup.','Add a drop of washing-up liquid and food colouring.','Slowly pour vinegar into the cup.','Watch the eruption!'],wow:'Baking soda + vinegar creates carbon dioxide gas. The gas bubbles out fast — like a real volcano!'},
+  {id:40,emoji:'🌈',title:'Skittles Rainbow',cat:'Chemistry',diff:'Easy',materials:['Skittles sweets','A white plate','Warm water'],steps:['Arrange Skittles in a circle on the plate.','Slowly pour warm water into the centre.','Wait and watch!','Colours travel towards the centre!'],wow:'The colour coating dissolves in water and moves to areas of less colour — diffusion!'},
+  {id:41,emoji:'🧪',title:'Cabbage pH Indicator',cat:'Chemistry',diff:'Medium',materials:['Red cabbage','Water','Various liquids: lemon juice, vinegar, milk, baking soda water'],steps:['Boil red cabbage in water for 5 mins (ask adult). Let cool.','Pour cabbage juice into several cups.','Add a different liquid to each cup.','Watch the colours change!'],wow:'Red cabbage contains a natural indicator. Acids turn it pink/red, bases turn it green/yellow!'},
+  {id:42,emoji:'💎',title:'Grow Crystals',cat:'Chemistry',diff:'Medium',materials:['Salt or sugar','Hot water (ask adult)','A jar','A string','A pencil'],steps:['Dissolve as much salt as possible in hot water.','Tie string to pencil and hang into jar.','Pour solution into jar.','Wait 2-3 days and crystals grow on the string!'],wow:'As water evaporates, the salt molecules arrange into perfect geometric crystal shapes!'},
+  {id:43,emoji:'🫧',title:'Super Strong Bubbles',cat:'Chemistry',diff:'Easy',materials:['Washing-up liquid','Water','Glycerine (from pharmacy)','A straw'],steps:['Mix 1 cup water + 2 spoons liquid soap + 1 spoon glycerine.','Stir gently — do not make foam.','Blow through a straw.','Try blowing a huge bubble!'],wow:'Glycerine makes bubbles stronger by slowing the evaporation of water from the bubble wall!'},
+  {id:44,emoji:'🍋',title:'Invisible Ink',cat:'Chemistry',diff:'Easy',materials:['Lemon juice','A cotton bud','White paper','A lamp or warm oven (adult help)'],steps:['Dip cotton bud in lemon juice.','Write a secret message on paper.','Let it dry completely — invisible!','Hold near a warm lamp — the message appears!'],wow:'Heat makes the lemon juice oxidise and turn brown — a chemical reaction reveals your secret message!'},
+  {id:45,emoji:'🌊',title:'Oil and Water',cat:'Chemistry',diff:'Easy',materials:['A clear bottle','Water','Cooking oil','Food colouring'],steps:['Fill half the bottle with coloured water.','Pour oil on top — it floats!','Put the cap on and shake.','Watch them separate again!'],wow:'Oil and water do not mix! Oil is less dense than water, so it always floats on top.'},
+  // BIOLOGY
+  {id:46,emoji:'🦋',title:'Butterfly Life Cycle',cat:'Biology',diff:'Easy',materials:['Paper','Crayons','Scissors'],steps:['Draw and colour 4 circles.','In each circle draw: egg, caterpillar, chrysalis, butterfly.','Cut them out and arrange in order.','Tell the story of the butterfly life cycle!'],wow:'A caterpillar completely dissolves inside the chrysalis and rebuilds itself as a butterfly — metamorphosis!'},
+  {id:47,emoji:'🌿',title:'Photosynthesis in a Leaf',cat:'Biology',diff:'Medium',materials:['A green leaf','A jar of water','Bright sunshine'],steps:['Put the leaf in the jar of water.','Leave in bright sunlight for 1 hour.','Look closely at the leaf underwater.','You will see tiny bubbles forming!'],wow:'The leaf is making OXYGEN through photosynthesis! The bubbles are oxygen gas being released!'},
+  {id:48,emoji:'🔬',title:'Examine a Feather',cat:'Biology',diff:'Easy',materials:['A feather (from a park or craft shop)','A magnifying glass'],steps:['Look at the feather with just your eyes.','Now use the magnifying glass.','Look at the barbs and tiny hooks.','Try separating the barbs and zipping them back together!'],wow:'Feather barbs have tiny hooks (barbules) that zip together to make a smooth surface for flight!'},
+  {id:49,emoji:'🐛',title:'Worm Habitat',cat:'Biology',diff:'Easy',materials:['A clear container','Soil','Sand','Dead leaves','Worms (from garden)','Dark paper'],steps:['Layer soil and sand in the container alternately.','Add dead leaves on top.','Add 2-3 worms.','Wrap in dark paper; check next day.'],wow:'Worms tunnel through soil, mixing layers and creating air pockets. They help plants grow!'},
+  {id:50,emoji:'👃',title:'Smell Science',cat:'Biology',diff:'Easy',materials:['Small cups','Cotton balls','Things to smell: vinegar, lemon, coffee, soap'],steps:['Soak cotton balls with different smells.','Put each in a cup and cover.','Blindfold a friend.','Can they guess the smell?'],wow:'Your nose can detect over one trillion different smells! Smell is linked to memory in the brain.'},
+  // FORCES & MOTION
+  {id:51,emoji:'🎳',title:'Ramp & Roll',cat:'Forces & Motion',diff:'Easy',materials:['Books (for a ramp)','A plank or cardboard','Various balls and toy cars'],steps:['Stack books to make a ramp.','Put the plank on top as a slope.','Roll different objects down the ramp.','Which goes further? Which is fastest?'],wow:'Gravity pulls everything down the ramp. Smooth round objects with less friction roll furthest!'},
+  {id:52,emoji:'🌍',title:'Gravity Drop Test',cat:'Forces & Motion',diff:'Easy',materials:['A heavy book','A small piece of paper','A high safe place to drop from'],steps:['Hold the book in one hand, paper in the other.','Drop both at the same time.','Book lands first — now crumple the paper into a ball.','Drop both again — now they land at the same time!'],wow:'Without air resistance, all objects fall at the same speed. The flat paper was slowed by air!'},
+  {id:53,emoji:'🚀',title:'Balloon Rocket',cat:'Forces & Motion',diff:'Easy',materials:['A balloon','A long string','A straw','Tape'],steps:['Thread string through the straw.','Tie string tightly across a room.','Blow up balloon but do not tie it.','Tape balloon to straw, let go — ZOOM!'],wow:'Air rushes out backwards, pushing the balloon forward! This is Newton\'s 3rd Law: every action has an equal opposite reaction — the same way real rockets work!'},
+  {id:54,emoji:'🌀',title:'Spinning Coin',cat:'Forces & Motion',diff:'Easy',materials:['A coin','A smooth table'],steps:['Flick the coin upright on the table.','Watch it spin then fall.','Try with different sized coins.','Which spins longest?'],wow:'The spinning coin stays upright because of gyroscopic force. As it slows, gravity wins and it falls!'},
+  {id:55,emoji:'🎈',title:'Parachute Drop',cat:'Forces & Motion',diff:'Easy',materials:['A plastic bag','String','A small toy figure','Scissors'],steps:['Cut the bag into a square.','Tie strings to each corner.','Tie strings to the toy.','Throw high in the air — it floats down!'],wow:'The parachute traps air and creates drag (air resistance) which slows the fall. Real parachutes work the same way!'},
+  {id:56,emoji:'🐠',title:'Cartesian Diver',cat:'Forces & Motion',diff:'Medium',materials:['A plastic bottle with lid','Water','A ketchup sachet'],steps:['Fill bottle completely with water.','Drop in a ketchup sachet (it should just float).','Screw lid on tightly.','Squeeze the bottle — diver sinks! Release — it rises!'],wow:'Squeezing increases pressure, compressing air in the sachet, making it denser so it sinks!'},
+  // MORE VARIED
+  {id:57,emoji:'🧁',title:'Yeast Balloon',cat:'Chemistry',diff:'Easy',materials:['Yeast packet','Warm water','Sugar','A bottle','A balloon'],steps:['Mix yeast + 1 spoon sugar in bottle with warm water.','Stretch balloon over bottle opening.','Wait 20 minutes.','Watch the balloon inflate!'],wow:'Yeast eats sugar and makes CO2 gas — the same gas that makes bread rise!'},
+  {id:58,emoji:'❄️',title:'Instant Ice Cream',cat:'Chemistry',diff:'Easy',materials:['Milk','Sugar','Vanilla','Ice','Salt','Two zip-lock bags'],steps:['Mix milk, 1 spoon sugar, vanilla in small bag.','Seal it tightly.','Fill big bag with ice and salt.','Put small bag inside, shake 10 mins — ice cream!'],wow:'Salt lowers ice\'s temperature below 0°C, freezing the milk mixture quickly!'},
+  {id:59,emoji:'🌿',title:'Transpiration Bag',cat:'Plants',diff:'Easy',materials:['A clear plastic bag','A leafy branch or plant in a pot','A rubber band'],steps:['Tie the clear bag tightly around a leafy branch.','Leave in sunlight for 2 hours.','Look inside the bag.','Water droplets have appeared!'],wow:'Plants release water vapour from their leaves — this is called transpiration. The droplets are water!'},
+  {id:60,emoji:'🎨',title:'Chromatography Art',cat:'Chemistry',diff:'Easy',materials:['Coffee filter paper','Water-based markers','A glass of water'],steps:['Draw coloured dots on the coffee filter.','Fold the filter and dip the bottom in water.','Watch the water travel upwards.','See the colours separate!'],wow:'Water carries the ink up the paper. Different dye molecules travel at different speeds, separating the colours!'},
+  {id:61,emoji:'🌡️',title:'Body Temperature Map',cat:'Biology',diff:'Easy',materials:['Your hands','Various surfaces: metal, wood, fabric, glass'],steps:['Touch a metal surface. How does it feel?','Touch a wooden surface. Warmer or cooler?','Touch a fabric surface.','Which REALLY feels coldest? Are they the same temperature?'],wow:'Metal conducts heat away from your skin quickly, so it feels cold even if it is the same temperature as wood!'},
+  {id:62,emoji:'🧠',title:'Memory Optical Illusion',cat:'Biology',diff:'Easy',materials:['Paper','Pencil','A stick'],steps:['Draw a bird on one side of paper.','Draw a cage on the other side.','Attach to stick.','Spin fast — the bird appears inside the cage!'],wow:'Your brain retains images for a fraction of a second (persistence of vision). It merges the two images!'},
+  {id:63,emoji:'🍎',title:'Apple Browning Science',cat:'Chemistry',diff:'Easy',materials:['An apple','Lemon juice','Water','Salt water','Plain water','Cups'],steps:['Cut apple into slices.','Dip each in a different liquid: lemon juice, salt water, plain water, nothing.','Wait 30 minutes.','Compare which slices turned brown!'],wow:'Lemon juice (Vitamin C / ascorbic acid) prevents oxidation — the same reason lemon is put on salads!'},
+  {id:64,emoji:'🦠',title:'Germ Handwashing',cat:'Biology',diff:'Easy',materials:['Glitter','Soap','Water'],steps:['Sprinkle glitter on your hands (pretend germs!).','Try to remove with just water.','Now use soap and wash for 20 seconds.','Check how much glitter remains!'],wow:'Soap breaks apart the oil layer on your skin where germs hide. This is why we wash with soap!'},
+  {id:65,emoji:'🌬️',title:'Lung Capacity',cat:'Biology',diff:'Easy',materials:['A large plastic bottle','Water','A bowl','A straw'],steps:['Fill bottle with water, invert into bowl.','Slide straw under the bottle opening.','Take a deep breath and blow steadily through straw.','The air displaces water — measure your lung capacity!'],wow:'The air you blow replaces the water, showing how much your lungs can hold in one breath!'},
+  {id:66,emoji:'🔭',title:'Toilet Roll Telescope',cat:'Light & Shadows',diff:'Easy',materials:['2 toilet rolls','Tape','2 magnifying glass lenses or reading glasses lenses'],steps:['Insert a lens at each end of the connected rolls.','Point at a far away object outside.','Look through one end.','Objects appear bigger and closer!'],wow:'A simple telescope uses two lenses to magnify distant objects — the same principle as real telescopes!'},
+  {id:67,emoji:'🌸',title:'Flower Dissection',cat:'Biology',diff:'Easy',materials:['A flower (carnation or tulip)','Paper','Magnifying glass'],steps:['Carefully pull apart the flower.','Lay each part on paper.','Identify: petals, stamens, pistil, sepals.','Draw and label each part!'],wow:'Flowers are reproduction machines! Pollen from stamens travels to the pistil to make seeds!'},
+  {id:68,emoji:'🧊',title:'Floating Iceberg',cat:'Water & Ice',diff:'Easy',materials:['A container of water','Ice cube'],steps:['Float the ice cube in water.','Look from the side.','How much is above water? How much below?','Mark the water line and wait for it to melt!'],wow:'About 90% of an iceberg is UNDER water! Ice is less dense than water so it floats.'},
+  {id:69,emoji:'🌊',title:'Wave Bottle',cat:'Water & Ice',diff:'Easy',materials:['A clear plastic bottle with lid','Water','Cooking oil','Blue food colouring'],steps:['Half fill bottle with blue water.','Pour in oil to fill the rest.','Seal lid tightly with glue.','Tilt slowly side to side — waves!'],wow:'Oil floats on water because it is less dense. Tilting creates gentle waves that look like the ocean!'},
+  {id:70,emoji:'⚡',title:'Static Electricity Hair',cat:'Electricity',diff:'Easy',materials:['An inflated balloon','A mirror','Dry hair'],steps:['Rub the balloon on your hair for 30 seconds.','Slowly pull the balloon away.','Watch your hair in the mirror!','Your hair stands up towards the balloon!'],wow:'The balloon steals electrons from your hair, making the balloon negative. Your positively charged hair is attracted to it!'},
+  {id:71,emoji:'🎈',title:'Self-Inflating Balloon',cat:'Chemistry',diff:'Easy',materials:['A balloon','A bottle','Baking soda','Vinegar'],steps:['Pour vinegar into the bottle.','Put baking soda inside the balloon.','Stretch balloon over bottle opening without tipping it.','Lift balloon — baking soda falls in, balloon inflates!'],wow:'Baking soda + vinegar = CO2 gas. The gas rushes into the balloon and fills it up!'},
+  {id:72,emoji:'🧲',title:'Floating Magnet Ring',cat:'Magnets',diff:'Easy',materials:['A pencil','3 ring magnets'],steps:['Slide one magnet onto pencil (note its orientation).','Slide second magnet same way — it floats!','Add third magnet.','Try flipping one magnet — it attracts instead!'],wow:'Same poles REPEL each other. The magnetic repulsion force holds the magnets apart — they appear to float!'},
+  {id:73,emoji:'🌿',title:'Herb in Water',cat:'Plants',diff:'Easy',materials:['Fresh herb cutting (mint works well)','A glass of water'],steps:['Take a 10cm cutting of fresh herb.','Remove bottom leaves.','Stand in a glass of water on windowsill.','Check daily — roots will grow in 1-2 weeks!'],wow:'Some plants can grow roots from their stems — this is called vegetative propagation!'},
+  {id:74,emoji:'🎨',title:'Milk and Soap Fireworks',cat:'Chemistry',diff:'Easy',materials:['Full-fat milk','Food colouring (multiple colours)','Washing-up liquid','A plate'],steps:['Pour milk onto plate to cover.','Drop colours around the milk.','Touch one drop of washing-up liquid to centre.','Watch the colours explode outward!'],wow:'Soap molecules rush to the milk surface, breaking fat molecules apart and carrying the colours with them!'},
+  {id:75,emoji:'🔊',title:'Vibrating Fork',cat:'Sound',diff:'Easy',materials:['A metal fork','A glass of water','A table'],steps:['Strike the fork on the edge of the table (gently).','Listen to the sound.','Touch the fork handle to the table — louder!','Dip in the water — buzzing and ripples!'],wow:'The fork vibrates (shakes) the air, table and water making sound waves. You can SEE sound in the water!'},
+  {id:76,emoji:'🏔️',title:'Mountain Fold',cat:'Forces & Motion',diff:'Easy',materials:['A sheet of paper','Two equal stacks of books'],steps:['Lay paper flat between two stacks of books.','Try placing a coin on it — it falls.','Now fold paper like a mountain ridge/accordion.','The same paper now holds many coins!'],wow:'Folding creates structure and distributes weight. Engineers use this in bridges and aircraft wings!'},
+  {id:77,emoji:'🌡️',title:'Hot vs Cold Colour',cat:'Chemistry',diff:'Easy',materials:['2 glasses of water','Hot water (adult helps)','Cold water','Same food colouring'],steps:['Fill one glass with hot water, one with cold.','Drop same amount of food colouring into each.','Watch what happens!','Hot water colours faster!'],wow:'Hot water has faster-moving molecules that mix with and spread the colour more quickly — diffusion!'},
+  {id:78,emoji:'🐟',title:'Fish Fins Physics',cat:'Forces & Motion',diff:'Easy',materials:['Paper','Scissors','A bowl of water'],steps:['Cut a fish shape from paper.','Cut a small notch at the tail.','Place fish on water surface.','Put a drop of washing-up liquid in the notch!'],wow:'Soap breaks water\'s surface tension at the tail, but the front still has strong surface tension — this propels the fish forward!'},
+  {id:79,emoji:'🌈',title:'Colour Mixing Flowers',cat:'Chemistry',diff:'Easy',materials:['White flowers (carnations work best)','Food colouring','Vases of water'],steps:['Add different colours to separate vases.','Split a flower stem carefully with scissors.','Put each half in a different colour.','Wait overnight and watch!'],wow:'The flower drinks two colours up to different petals — resulting in a two-coloured flower!'},
+  {id:80,emoji:'🎃',title:'Egg in a Bottle',cat:'Forces & Motion',diff:'Medium',materials:['A hard-boiled peeled egg','A glass milk bottle','Burning paper strip (ADULT MUST DO THIS)'],steps:['Adult drops a lit paper strip into bottle.','Quickly place egg on top of bottle.','The egg gets slowly sucked in!','Physics at work!'],wow:'Fire uses up oxygen, reducing air pressure inside. Higher outside pressure pushes egg inward! Always have adult supervision.'},
+  {id:81,emoji:'🧫',title:'Bread Mould Study',cat:'Biology',diff:'Medium',materials:['2 bread slices','2 zip-lock bags','Labels','Magnifying glass'],steps:['Label bags A (damp) and B (dry).','Slightly dampen one bread piece with water.','Seal both and leave in a warm place.','Check daily with magnifying glass for 5 days!'],wow:'Mould is a fungus that grows where there is warmth and moisture. Bread B stays mould-free longer!'},
+  {id:82,emoji:'🌺',title:'Pressed Flower Art',cat:'Plants',diff:'Easy',materials:['Flowers and leaves','Heavy books','Wax paper'],steps:['Place flowers between wax paper sheets.','Press between heavy books.','Wait one week.','Create artwork with your pressed flowers!'],wow:'The books press moisture out of the flowers, preserving their colour and shape permanently!'},
+  {id:83,emoji:'💧',title:'Water Drop Magnifier',cat:'Light & Shadows',diff:'Easy',materials:['A piece of plastic wrap','A coin','Water'],steps:['Place plastic wrap flat on a newspaper page.','Put one drop of water on the plastic.','Look through the droplet at the newspaper.','Letters appear bigger!'],wow:'A rounded water droplet acts as a convex lens! This is how the first microscopes worked!'},
+  {id:84,emoji:'🎯',title:'Straw Shooter',cat:'Forces & Motion',diff:'Easy',materials:['2 straws (one slightly wider)','A piece of paper','Tape'],steps:['Crumple a tiny ball of paper.','Put the thin straw inside the wider one.','Place paper ball in the thin straw.','Blow hard through the outer straw!'],wow:'Air pressure builds up behind the paper ball and propels it forward — the same principle as a blowpipe!'},
+  {id:85,emoji:'🌍',title:'Soil Layers Jar',cat:'Biology',diff:'Easy',materials:['Garden soil','A jar','Water'],steps:['Half-fill jar with garden soil.','Fill to top with water.','Shake vigorously.','Leave for 1 hour and observe the layers!'],wow:'Heavy sand and gravel sink first, then silt, then clay, then organic matter floats on top — soil has layers!'},
+  {id:86,emoji:'❤️',title:'Heart Rate Experiment',cat:'Biology',diff:'Easy',materials:['A watch or timer','Your fingers'],steps:['Sit quietly and count your pulse for 1 minute.','Do 20 jumping jacks.','Count pulse again immediately.','Rest 3 minutes and count again!'],wow:'Exercise makes your heart beat faster to pump more oxygen to your muscles. After rest, it slows — your heart is efficient!'},
+  {id:87,emoji:'🧁',title:'Density Tower',cat:'Chemistry',diff:'Easy',materials:['A tall glass','Honey','Washing-up liquid','Water (coloured)','Cooking oil','Rubbing alcohol (adult)'],steps:['Slowly pour each liquid down the side of the glass.','Honey first, then syrup, soap, water, oil, alcohol.','Do NOT mix!','See the layers!'],wow:'Each liquid has a different density. Denser liquids sink below less-dense ones, creating visible layers!'},
+  {id:88,emoji:'🎋',title:'Paper Bridge Strength',cat:'Forces & Motion',diff:'Easy',materials:['Several sheets of A4 paper','Coins','Two equal stacks of books'],steps:['Lay a flat paper between two books.','Add coins — how many before it collapses?','Make a new bridge by folding paper accordion-style.','Add coins — many more fit!'],wow:'Corrugated (folded) shapes distribute weight efficiently. Corrugated cardboard uses this same principle!'},
+  {id:89,emoji:'🌼',title:'Acid or Base Flowers',cat:'Chemistry',diff:'Easy',materials:['Blue hydrangea petals (or red cabbage juice)','Vinegar','Baking soda solution'],steps:['Put petals in two cups of water.','Add vinegar to one.','Add baking soda solution to the other.','Compare the colours!'],wow:'Hydrangeas change colour based on soil acidity. Acidic soil = blue flowers, alkaline soil = pink flowers!'},
+  {id:90,emoji:'🔮',title:'Cartesian Pepper',cat:'Chemistry',diff:'Easy',materials:['A bowl of water','Black pepper','Washing-up liquid'],steps:['Fill bowl with water.','Sprinkle pepper over the surface.','Dip your finger in the centre.','Nothing. Now dip soapy finger!'],wow:'Surface tension holds the pepper on water. Soap breaks surface tension and the pepper rushes to the edges!'},
+  {id:91,emoji:'💨',title:'Air Cannon',cat:'Forces & Motion',diff:'Easy',materials:['A round plastic tub (like an ice cream tub)','Cling film','An elastic band'],steps:['Remove the tub lid.','Stretch cling film tightly over the opening.','Secure with elastic band.','Point at a candle flame (adult lights) and tap the film!'],wow:'Tapping creates a ring vortex of air that travels in a straight line — you can feel and see it!'},
+  {id:92,emoji:'🏋️',title:'Egg Strength Test',cat:'Forces & Motion',diff:'Easy',materials:['4 raw eggs (in shells)','Heavy books'],steps:['Place 4 eggs in a rectangle formation with pointed ends up.','Carefully place a heavy book on top.','Add another book.','How many books can 4 eggs hold?'],wow:'An arch shape distributes force outward, not downward. Egg shells can hold enormous weight despite being thin!'},
+  {id:93,emoji:'🌙',title:'Moon Phase Cookie',cat:'Light & Shadows',diff:'Easy',materials:['Round cookies (Oreos work great)','A spoon'],steps:['Use the spoon to scrape the cream in different amounts from each cookie.','Arrange to show all 8 moon phases.','New moon (no cream) to full moon (all cream).','Learn the phases as you eat!'],wow:'Moon phases are caused by our view of the sunlit part of the Moon as it orbits Earth each month!'},
+  {id:94,emoji:'🎈',title:'Bernoulli Levitation',cat:'Forces & Motion',diff:'Easy',materials:['A hairdryer','A ping pong ball'],steps:['Turn the hairdryer on pointing upward.','Place the ping pong ball in the air stream.','Watch it hover!','Slowly tilt the dryer — the ball follows!'],wow:'Fast-moving air has LOWER pressure. The surrounding slower air pushes the ball into the fast stream — keeping it afloat!'},
+  {id:95,emoji:'🔬',title:'Microorganism Hunt',cat:'Biology',diff:'Medium',materials:['Pond water or puddle water','A clear glass','A strong magnifying glass'],steps:['Collect a sample of pond or puddle water.','Let it sit undisturbed for 1 hour.','Hold a magnifying glass close to the glass.','Look at the water near the surface in bright light!'],wow:'You might spot tiny creatures like water fleas, algae or protozoa — invisible to the naked eye!'},
+  {id:96,emoji:'🎭',title:'Pepper and Soap',cat:'Chemistry',diff:'Easy',materials:['A plate of water','Pepper','Washing-up liquid'],steps:['Sprinkle pepper over water surface.','Ask: what happens when you touch the water? (nothing)','Now touch with a soapy finger.','Pepper races to the edge instantly!'],wow:'This shows how soap molecules rush to break water\'s surface tension — the same way soap cleans germs off skin!'},
+  {id:97,emoji:'🏗️',title:'Spaghetti Tower',cat:'Forces & Motion',diff:'Easy',materials:['Dried spaghetti (uncooked)','Marshmallows','A weight (small toy)'],steps:['Build a tower using spaghetti and marshmallows as joints.','Try to make it as tall as possible.','Place the small toy on top.','Whose tower holds the weight and stands tallest?'],wow:'Triangles in structure are the strongest shape — engineers use this in buildings and bridges!'},
+  {id:98,emoji:'🌊',title:'Tsunami in a Box',cat:'Water & Ice',diff:'Easy',materials:['A long plastic tray','Sand','Water'],steps:['Fill one end of tray with sand as a "beach".','Fill the rest with water.','Quickly lift one end and drop it.','Watch the wave hit the beach!'],wow:'A tsunami is a wave caused by an underwater earthquake or landslide. Energy travels through water to the shore!'},
+  {id:99,emoji:'🧬',title:'DNA Extraction',cat:'Biology',diff:'Medium',materials:['A strawberry','Salt water (1/4 spoon in water)','Washing-up liquid','Coffee filter','Rubbing alcohol (cold, adult handles)'],steps:['Mash strawberry in salt water with a drop of liquid soap.','Strain through coffee filter into a glass.','Slowly pour cold alcohol down the side.','White strands appear — that is DNA!'],wow:'You can actually SEE the genetic blueprint of a strawberry! DNA is found in every cell of every living thing!'},
+  {id:100,emoji:'🚀',title:'Straw Rocket',cat:'Forces & Motion',diff:'Easy',materials:['Paper','A straw','Tape','Scissors'],steps:['Roll a small piece of paper around the straw to make a tube, tape it.','Close one end with tape to make the nose.','Add tiny paper fins.','Put on straw and blow hard — it launches!'],wow:'Air pressure from your blow propels the rocket forward. NASA engineers use the same gas pressure principles in real rockets!'},
+];
+
+const expCategories=['All','Water & Ice','Plants','Magnets','Light & Shadows','Electricity','Sound','Weather & Air','Chemistry','Biology','Forces & Motion'];
+const catColors={'All':'#7B2FBE','Water & Ice':'#3498DB','Plants':'#2ECC71','Magnets':'#E74C3C','Light & Shadows':'#F1C40F','Electricity':'#9B59B6','Sound':'#FF6B9D','Weather & Air':'#1ABC9C','Chemistry':'#FF6B35','Biology':'#27AE60','Forces & Motion':'#E67E22'};
+let currentExpCat='All',currentSearch='';
+
+function renderExpCats(){
+  const c=document.getElementById('expCats');c.innerHTML='';
+  expCategories.forEach(cat=>{
+    const btn=document.createElement('button');btn.className='ec-btn'+(cat==='All'?' active':'');
+    btn.textContent=(cat==='All'?'🔬 ':'')+cat;
+    btn.style.background=catColors[cat]||'#888';btn.style.color='#fff';
+    btn.onclick=()=>{
+      document.querySelectorAll('.ec-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');currentExpCat=cat;renderExps();
+    };
+    c.appendChild(btn);
+  });
+}
+
+function filterExps(q){currentSearch=q;renderExps();}
+
+function renderExps(){
+  const g=document.getElementById('expGrid');g.innerHTML='';
+  const filtered=experiments.filter(e=>{
+    const catOk=currentExpCat==='All'||e.cat===currentExpCat;
+    const searchOk=!currentSearch||e.title.toLowerCase().includes(currentSearch.toLowerCase())||e.cat.toLowerCase().includes(currentSearch.toLowerCase());
+    return catOk&&searchOk;
+  });
+  document.getElementById('expCount').textContent=`Showing ${filtered.length} experiment${filtered.length!==1?'s':''} 🔬`;
+  filtered.forEach(e=>{
+    const col=catColors[e.cat]||'#7B2FBE';
+    const card=document.createElement('div');card.className='exp-card';
+    card.innerHTML=`
+      <div class="exp-top">
+        <span class="exp-emoji">${e.emoji}</span>
+        <div class="exp-meta">
+          <h4>${e.title}</h4>
+          <div class="exp-tags">
+            <span class="exp-tag" style="background:${col}">${e.cat}</span>
+            <span class="difficulty ${e.diff==='Easy'?'d-easy':'d-medium'}">${e.diff==='Easy'?'⭐ Easy':'🌟 Medium'}</span>
+          </div>
+        </div>
+        <span class="exp-arrow">▼</span>
+      </div>
+      <div class="exp-body">
+        <h5>🛒 You need:</h5>
+        <ul>${e.materials.map(m=>`<li>${m}</li>`).join('')}</ul>
+        <h5>📋 Steps:</h5>
+        <ol class="exp-steps">${e.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+        <div class="wow-box">💡 Wow fact: ${e.wow}</div>
+      </div>`;
+    card.querySelector('.exp-top').onclick=()=>{card.classList.toggle('open');};
+    g.appendChild(card);
+  });
+}
+
+// ===== QUIZ =====
+const quizData=[
+  {q:'What do plants need to grow?',icon:'🌱',opts:['Sun, Water, Air, Soil','Only water','Only sunlight','Sand and rocks'],ans:0},
+  {q:'What happens when ice gets hot?',icon:'🧊',opts:['Gets bigger','Melts into water','Becomes a rock','Flies away'],ans:1},
+  {q:'Which object does a magnet attract?',icon:'🧲',opts:['Wooden block','Plastic cup','Metal paper clip','Rubber ball'],ans:2},
+  {q:'How is a shadow formed?',icon:'🌑',opts:['By wind','When light is blocked','By water','By plants'],ans:1},
+  {q:'What is a closed circuit?',icon:'🔌',opts:['A broken path','Switch is off','Complete path — light ON!','No wire'],ans:2},
+  {q:'What does a battery do?',icon:'🔋',opts:['Makes shadows','Gives power to things','Blocks light','Grows plants'],ans:1},
+  {q:'What part of a lamp covers the bulb?',icon:'🪔',opts:['The wire','The base','The switch','The shade'],ans:3},
+  {q:'Which needs electricity?',icon:'⚡',opts:['A chair','A book','A lamp','A stone'],ans:2},
+  {q:'What do roots do?',icon:'🌿',opts:['Make food','Block light','Drink water from soil','Create shadows'],ans:2},
+  {q:'Baking soda + vinegar makes?',icon:'🌋',opts:['Ice','CO2 bubbles','Plastic','Colour'],ans:1},
+];
+let qIdx=0,score=0,answered=false;
+function initQuiz(){qIdx=0;score=0;renderQuiz();}
+function renderQuiz(){
+  const c=document.getElementById('quizContainer');
+  if(qIdx>=quizData.length){
+    c.innerHTML=`<div class="quiz-result"><div style="font-size:4rem">🎉</div><h3>Amazing Job!</h3><div style="font-size:4rem;font-weight:800;color:var(--green)">${score}/${quizData.length}</div><p style="color:#888;margin:10px 0">You got ${score} out of ${quizData.length}!</p><button class="restart-btn" onclick="initQuiz()">🔄 Play Again!</button></div>`;
+    if(score>=7)confetti();return;
+  }
+  const q=quizData[qIdx];answered=false;
+  c.innerHTML=`<div class="quiz-progress"><div class="quiz-bar" style="width:${(qIdx/quizData.length)*100}%"></div></div><div class="quiz-icon">${q.icon}</div><div class="quiz-q">${q.q}</div><div class="quiz-opts">${q.opts.map((o,i)=>`<button class="q-opt" onclick="answerQuiz(${i})">${o}</button>`).join('')}</div><div class="quiz-score">⭐ Score: ${score} | Q${qIdx+1}/${quizData.length}</div>`;
+}
+function answerQuiz(idx){
+  if(answered)return;answered=true;
+  const btns=document.querySelectorAll('.q-opt'),correct=quizData[qIdx].ans;
+  btns[correct].classList.add('correct');
+  if(idx===correct)score++;else btns[idx].classList.add('wrong');
+  setTimeout(()=>{qIdx++;renderQuiz();},1100);
+}
+
+// ===== MATCH =====
+const matchPairs=[{emoji:'🧲',label:'Magnet'},{emoji:'💡',label:'Bulb'},{emoji:'🔋',label:'Battery'},{emoji:'🌱',label:'Plant'},{emoji:'🧊',label:'Ice'},{emoji:'⚡',label:'Electric'}];
+let matchSelected=[],matchMatched=0,matchMoves=0,matchLocked=false;
+function initMatch(){
+  matchSelected=[];matchMatched=0;matchMoves=0;matchLocked=false;
+  document.getElementById('matchMoves').textContent='Moves: 0';
+  document.getElementById('matchPairs').textContent='Pairs: 0/6';
+  const cards=[...matchPairs.map(p=>({...p,type:'emoji'})),...matchPairs.map(p=>({...p,type:'label'}))];
+  for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]];}
+  const g=document.getElementById('matchGrid');g.innerHTML='';
+  cards.forEach(c=>{
+    const el=document.createElement('div');el.className='match-card';el.dataset.label=c.label;
+    el.innerHTML=`<span class="card-back">❓</span><span class="card-front">${c.type==='emoji'?c.emoji:c.label}</span>`;
+    el.onclick=()=>flipCard(el);g.appendChild(el);
+  });
+}
+function flipCard(el){
+  if(matchLocked||el.classList.contains('revealed')||el.classList.contains('matched'))return;
+  el.classList.add('revealed');matchSelected.push(el);
+  if(matchSelected.length===2){
+    matchLocked=true;matchMoves++;
+    document.getElementById('matchMoves').textContent=`Moves: ${matchMoves}`;
+    if(matchSelected[0].dataset.label===matchSelected[1].dataset.label){
+      matchSelected.forEach(c=>c.classList.add('matched'));
+      matchMatched++;document.getElementById('matchPairs').textContent=`Pairs: ${matchMatched}/6`;
+      matchSelected=[];matchLocked=false;
+      if(matchMatched===6){setTimeout(()=>{confetti();},300);}
+    }else{setTimeout(()=>{matchSelected.forEach(c=>c.classList.remove('revealed'));matchSelected=[];matchLocked=false;},900);}
+  }
+}
+
+// ===== SORT =====
+const sortItems2=[{name:'💡 Lamp',power:true},{name:'🪑 Chair',power:false},{name:'📺 TV',power:true},{name:'🚲 Bike',power:false},{name:'📻 Radio',power:true},{name:'📖 Book',power:false},{name:'🌀 Fan',power:true},{name:'🧸 Teddy',power:false},{name:'🖥️ Computer',power:true},{name:'🎃 Pumpkin',power:false}];
+function initSort(){
+  const container=document.getElementById('sortItems');container.innerHTML='';
+  [...sortItems2].sort(()=>Math.random()-.5).forEach(item=>{
+    const btn=document.createElement('button');btn.className='sort-item';btn.textContent=item.name;
+    btn.onclick=()=>placeItem(btn,item);container.appendChild(btn);
+  });
+  document.getElementById('binPower').innerHTML='';document.getElementById('binNo').innerHTML='';
+  document.getElementById('sortResult').style.display='none';
+}
+function placeItem(btn,item){
+  const binId=item.power?'binPower':'binNo';
+  const tag=document.createElement('span');
+  tag.style.cssText='background:var(--green);color:#fff;border-radius:10px;padding:4px 10px;font-size:.82rem;font-weight:700;';
+  tag.textContent=item.name;document.getElementById(binId).appendChild(tag);btn.remove();
+  if(document.getElementById('sortItems').children.length===0){
+    const res=document.getElementById('sortResult');res.style.display='block';
+    res.innerHTML='🎉 Amazing! You sorted them all correctly! Science Star! ⭐';res.style.color='var(--green)';confetti();
+  }
+}
+
+// ===== GAME TABS =====
+function showGame(id,btn){
+  document.querySelectorAll('.game-area').forEach(g=>g.classList.remove('active'));
+  document.getElementById('game-'+id).classList.add('active');
+  document.querySelectorAll('.gt-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  if(id==='match')initMatch();if(id==='sort')initSort();if(id==='quiz')initQuiz();
+}
+
+// ===== CONFETTI =====
+function confetti(){
+  const colors=['#7B2FBE','#FF6B9D','#F1C40F','#2ECC71','#3498DB','#FF6B35'];
+  const wrap=document.createElement('div');wrap.className='confetti-wrap';
+  for(let i=0;i<70;i++){
+    const p=document.createElement('div');p.className='c-piece';
+    p.style.cssText=`left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*2}s;animation-duration:${2+Math.random()*2}s;border-radius:${Math.random()>.5?'50%':'2px'};`;
+    wrap.appendChild(p);
+  }
+  document.body.appendChild(wrap);setTimeout(()=>wrap.remove(),5000);
+}
+
+// ===== INIT =====
+renderExpCats();renderExps();initQuiz();initMatch();initSort();renderVocab('all');
+</script>
+</body>
+</html>
